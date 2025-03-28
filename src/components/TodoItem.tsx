@@ -8,8 +8,14 @@ interface Props {
 
 const TodoItem = ({ todo, onToggleDone, deleteTodo }: Props) => {
   return (
-    <div className='bg-gray-500 flex w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between'>
-      <p className={todo.done ? 'line-through' : 'text-gray-800'}>
+    <div className='bg-gray-500 flex w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between items-center'>
+      <p
+        className={
+          todo.done
+            ? 'line-through text-gray-800 text-2xl'
+            : 'text-gray-800 text-2xl'
+        }
+      >
         {todo.title}
       </p>
       <div className='items-center p-2'>
