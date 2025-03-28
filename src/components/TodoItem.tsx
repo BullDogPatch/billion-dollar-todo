@@ -11,7 +11,7 @@ const TodoItem = ({ todo, onToggleDone }: Props) => {
       <p className={todo.done ? 'line-through' : ''}>{todo.title}</p>
       <input
         type='checkbox'
-        value={todo.done}
+        checked={todo.done}
         onChange={() => onToggleDone(todo.id)}
       />
     </div>
