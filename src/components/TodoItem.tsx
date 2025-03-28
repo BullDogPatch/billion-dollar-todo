@@ -1,4 +1,5 @@
 import { Todo } from '../App';
+import { motion } from 'motion/react';
 
 interface Props {
   todo: Todo;
@@ -8,7 +9,14 @@ interface Props {
 
 const TodoItem = ({ todo, onToggleDone, deleteTodo }: Props) => {
   return (
-    <div className='bg-gray-500 flex w-[300px] md:w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between items-center'>
+    <motion.div
+      layout
+      initial={{ opacity: 0, x: -400, scale: 0.5 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: 200, scale: 1.2 }}
+      transition={{ duration: 0.6, type: 'spring' }}
+      className='bg-gray-500 flex w-[300px] md:w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between items-center'
+    >
       <p
         className={
           todo.done
@@ -32,7 +40,7 @@ const TodoItem = ({ todo, onToggleDone, deleteTodo }: Props) => {
           &times;
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
