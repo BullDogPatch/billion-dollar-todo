@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Todos from './components/Todos';
 import Form from './components/Form';
+import Header from './components/Header';
 
 export interface Todo {
   id: string;
@@ -13,6 +14,8 @@ function App() {
     const storedTodos = localStorage.getItem('todos');
     return storedTodos ? (JSON.parse(storedTodos) as Todo[]) : [];
   });
+
+  const doneTodos = todos.filter((todo) => todo.done).length;
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -35,12 +38,21 @@ function App() {
     );
   };
 
+  const deleteTodo = (id: string) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
   return (
-    <>
-      <h1>Tick of your daily tasks</h1>
+    <div className='h-[100vh]  mx-auto'>
+      <Header />
       <Form onAddTodo={addTodo} />
-      <Todos todos={todos} onToggleDone={handleToggleDone} />
-    </>
+      <p className='text-center'>You have {doneTodos} tasks marked as done.</p>
+      <Todos
+        todos={todos}
+        onToggleDone={handleToggleDone}
+        deleteTodo={deleteTodo}
+      />
+    </div>
   );
 }
 
