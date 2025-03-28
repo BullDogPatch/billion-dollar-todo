@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Todos from './components/Todos';
+import Form from './components/Form';
 
 export interface Todo {
   id: string;
@@ -27,15 +28,6 @@ const initialState: Todo[] = [
 
 function App() {
   const [todos, setTodos] = useState(initialState);
-  const [todoText, setTodoText] = useState<string>('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!todoText) return;
-    const newTodo = { id: crypto.randomUUID(), title: todoText, done: false };
-    addTodo(newTodo);
-    setTodoText('');
-  };
 
   const addTodo = (item: Todo) => {
     setTodos((prev) => [item, ...prev]);
@@ -57,14 +49,7 @@ function App() {
   return (
     <>
       <h1>Tick of your daily tasks</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={todoText}
-          type='text'
-          onChange={(e) => setTodoText(e.target.value)}
-        />
-        <button type='submit'>Add</button>
-      </form>
+      <Form onAddTodo={addTodo} />
       <Todos todos={todos} onToggleDone={handleToggleDone} />
     </>
   );
