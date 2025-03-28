@@ -8,7 +8,7 @@ interface Props {
 
 const TodoItem = ({ todo, onToggleDone, deleteTodo }: Props) => {
   return (
-    <div className='bg-gray-500 flex w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between items-center'>
+    <div className='bg-gray-500 flex w-[300px] md:w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between items-center'>
       <p
         className={
           todo.done
