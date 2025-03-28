@@ -46,7 +46,11 @@ function App() {
     <div className='h-[100vh]  mx-auto'>
       <Header />
       <Form onAddTodo={addTodo} />
-      <p className='text-center'>You have {doneTodos} tasks marked as done.</p>
+      {todos.length > 0 && (
+        <p className='text-center'>
+          You have {doneTodos} tasks marked as done.
+        </p>
+      )}
       <Todos
         todos={todos}
         onToggleDone={handleToggleDone}

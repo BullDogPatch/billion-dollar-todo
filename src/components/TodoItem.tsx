@@ -15,7 +15,7 @@ const TodoItem = ({ todo, onToggleDone, deleteTodo }: Props) => {
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 200, scale: 1.2 }}
       transition={{ duration: 0.6, type: 'spring' }}
-      className='bg-gray-500 flex w-[300px] md:w-[500px] border border-amber-300 m-6 p-6 rounded-md justify-between items-center'
+      className='bg-gray-500 flex w-[300px] md:w-[500px] border border-amber-300 m-4 p-6 rounded-md justify-between items-center'
     >
       <p
         className={

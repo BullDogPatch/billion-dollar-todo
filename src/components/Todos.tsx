@@ -13,14 +13,18 @@ const Todos = ({ todos, onToggleDone, deleteTodo }: Props) => {
   return (
     <div className='flex flex-col justify-center items-center'>
       <AnimatePresence>
-        {sortedTodos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggleDone={onToggleDone}
-            deleteTodo={deleteTodo}
-          />
-        ))}
+        {todos.length > 0 ? (
+          sortedTodos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggleDone={onToggleDone}
+              deleteTodo={deleteTodo}
+            />
+          ))
+        ) : (
+          <p>You have no tasks yet</p>
+        )}
       </AnimatePresence>
     </div>
   );
