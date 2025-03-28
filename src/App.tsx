@@ -41,6 +41,19 @@ function App() {
     setTodos((prev) => [item, ...prev]);
   };
 
+  const handleToggleDone = (id: string) => {
+    setTodos((prevItems) =>
+      prevItems.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              done: !todo.done,
+            }
+          : todo
+      )
+    );
+  };
+
   return (
     <>
       <h1>Tick of your daily tasks</h1>
@@ -52,7 +65,7 @@ function App() {
         />
         <button type='submit'>Add</button>
       </form>
-      <Todos todos={todos} />
+      <Todos todos={todos} onToggleDone={handleToggleDone} />
     </>
   );
 }
