@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Todos from './components/Todos';
 import Form from './components/Form';
 
@@ -8,26 +8,21 @@ export interface Todo {
   done: boolean;
 }
 
-const initialState: Todo[] = [
-  {
-    id: crypto.randomUUID(),
-    title: 'Do washing',
-    done: false,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: 'Take the dog to the vets',
-    done: false,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: 'fetch some shopping',
-    done: true,
-  },
-];
-
 function App() {
-  const [todos, setTodos] = useState(initialState);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const storedTodos = localStorage.getItem('todos');
+
+    try {
+      return storedTodos ? (JSON.parse(storedTodos) as Todo[]) : [];
+    } catch (error) {
+      console.error('Error parsing todos from localStorage', error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (item: Todo) => {
     setTodos((prev) => [item, ...prev]);
